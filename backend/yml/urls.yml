@@ -1,0 +1,5 @@
+urls:
+  http:
+    localhost: "http://localhost:5173"
+  https:
+    localhost: "https://localhost:5173"

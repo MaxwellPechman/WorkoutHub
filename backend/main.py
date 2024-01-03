@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from backend.app.config import load_urls, load_host, load_port
 
+
 app_name = "main:app"
 app = FastAPI()
 
