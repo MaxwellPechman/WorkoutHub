@@ -1,10 +1,10 @@
 import os
 
-from backend.app.utils.env import env
-from backend.app.utils.files import safe_find_file
-from backend.app.utils.net import is_valid_address, InvalidAddressFormat, is_valid_port, InvalidPortFormat
-from backend.app.utils.num import is_natural_number_str
-from backend.app.utils.yml import load_yaml, extract_yaml, extract_yaml_values
+from backend.app.util.env import env
+from backend.app.util.files import safe_find_file
+from backend.app.util.net import is_valid_address, InvalidAddressFormat, is_valid_port, InvalidPortFormat
+from backend.app.util.num import is_natural_number_str
+from backend.app.util.yml import load_yaml, extract_yaml, extract_yaml_values
 
 
 def load_host(env_name: str):
