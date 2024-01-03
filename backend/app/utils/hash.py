@@ -1,7 +1,17 @@
 import hashlib
 
 
-def hash_string(strings: str) -> str:
-    encoded_string = strings.encode('utf-8')
+from backend.app.utils.strings import is_empty
+
+
+class InvalidString(Exception):
+    pass
+
+
+def hash_string(strg: str) -> str:
+    if is_empty(strg):
+        raise InvalidString()
+
+    encoded_string = strg.encode('utf-8')
     hashed_string = hashlib.sha256(encoded_string)
     return hashed_string.hexdigest()
