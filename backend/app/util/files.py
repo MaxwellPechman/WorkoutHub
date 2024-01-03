@@ -10,7 +10,6 @@ class FileNotFound(Exception):
 
 
 def read_dir_files(directory: str) -> dict[str, str]:
-    print(os.path.abspath(directory))
     if not os.path.isdir(directory):
         raise FileNotDirectory(directory)
 

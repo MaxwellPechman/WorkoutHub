@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from backend.app.utils.files import safe_find_file
+from backend.app.util.files import safe_find_file
 
 
 ENV_FILE = ".env"

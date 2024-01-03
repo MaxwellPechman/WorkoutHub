@@ -1,7 +1,7 @@
 import hashlib
 
 
-from backend.app.utils.strings import is_empty
+from backend.app.util.strings import is_empty
 
 
 class InvalidString(Exception):

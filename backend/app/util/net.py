@@ -1,4 +1,4 @@
-from backend.app.utils.num import is_natural_number_str
+from backend.app.util.num import is_natural_number_str
 
 
 class InvalidAddressFormat(Exception):
