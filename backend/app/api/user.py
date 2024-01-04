@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+
+from backend.app.db.crud.user import create
 from backend.app.schema.user import UserRegister
 
 
@@ -11,4 +13,5 @@ user_router = APIRouter(
 
 @user_router.post("/register")
 async def register_user(user: UserRegister):
-    return None
+    create(user.name, user.mail, user.password)
+    return "User created."
