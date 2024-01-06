@@ -12,9 +12,8 @@ export function RegisterPage() {
         axios.post("http://127.0.0.1:3300/user/register", user, {
             withCredentials: true
         })
-            .then((response) => {
+            .then(() => {
                 navigate("/")
-                console.log("Backend request was successful " + response.statusText)
             })
             .catch((error) => {
                 console.log("An error occured while transmitting data to backend " + error)
