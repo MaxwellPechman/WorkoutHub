@@ -15,8 +15,12 @@ def create(name: str, mail: str, password: str):
     db.execute(query, user)
 
 
-def read():
-    pass
+def read(name: str) -> list:
+    user = {"name": name}
+    query = sql.get_query("readUser.sql")
+    db.execute(query, user)
+
+    return db.fetch_one()
 
 
 def update():
