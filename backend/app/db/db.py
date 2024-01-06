@@ -2,6 +2,7 @@ import psycopg
 
 from loguru import logger
 from psycopg import Connection
+from psycopg.rows import Row
 
 from backend.app.config import load_db_connection_str
 from backend.app.db.sql import SQL
@@ -49,6 +50,27 @@ class DatabaseClient:
                 self.connection.commit()
 
             except DatabaseExecuteError as exception:
+                logger.error("Unable to execute query: " + exception.__str__())
+
+    def fetch_one(self) -> list:
+        if not self.connected:
+            logger.error("Not connected to database.")
+            raise DatabaseConnectionError()
+
+        with self.connection.cursor() as cursor:
+            try:
+                row: Row | None = cursor.fetchone()
+                if row is None:
+                    logger.error("No data was selected from the database.")
+                    raise DatabaseFetchError()
+
+                elements: list = []
+                for element in row:
+                    elements.append(element)
+
+                return elements
+
+            except DatabaseFetchError as exception:
                 logger.error("Unable to execute query: " + exception.__str__())
 
     def dispose(self):
