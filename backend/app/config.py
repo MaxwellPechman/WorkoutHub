@@ -28,12 +28,18 @@ def load_port(env_name: str) -> int:
     raise InvalidPortFormat()
 
 
-def load_db_connection_str(sslmode: str = "prefer", connection_timeout: int = 10) -> str:
-    return ("host=" + load_host("DB_HOST") +
-            " port=" + str(load_port("DB_PORT")) +
-            " dbname=" + env.get_env("DB_NAME") +
-            " user=" + env.get_env("DB_USER") +
-            " password=" + env.get_env("DB_PASSWORD") +
+def load_mongo_connection_str() -> str:
+    return ("mongodb://" +
+            env.get_env("MONGO_USER") + ":" + env.get_env("MONGO_PASSWORD") + "@" +
+            env.get_env("MONGO_HOST") + ":" + str(env.get_env("MONGO_PORT")))
+
+
+def load_postgres_connection_str(sslmode: str = "prefer", connection_timeout: int = 10) -> str:
+    return ("host=" + load_host("POSTGRES_HOST") +
+            " port=" + str(load_port("POSTGRES_PORT")) +
+            " dbname=" + env.get_env("POSTGRES_NAME") +
+            " user=" + env.get_env("POSTGRES_USER") +
+            " password=" + env.get_env("POSTGRES_PASSWORD") +
             " sslmode=" + sslmode +
             " connect_timeout=" + str(connection_timeout))
 

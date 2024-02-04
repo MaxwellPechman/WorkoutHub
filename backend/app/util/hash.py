@@ -8,10 +8,10 @@ class InvalidString(Exception):
     pass
 
 
-def hash_string(strg: str) -> str:
-    if is_empty(strg):
+def hash_string(strings: str) -> str:
+    if is_empty(strings):
         raise InvalidString()
 
-    encoded_string = strg.encode('utf-8')
+    encoded_string = strings.encode('utf-8')
     hashed_string = hashlib.sha256(encoded_string)
     return hashed_string.hexdigest()

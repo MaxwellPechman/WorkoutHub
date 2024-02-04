@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { defaultUserRegister, UserRegister } from "../../user.ts";
+import { setSessionStorageItem } from "../../utils/sessionStorageUtils.tsx";
 import axios from "axios";
 import wh_icon from "../../../assets/wh_icon.png";
 
@@ -12,7 +13,8 @@ export function RegisterPage() {
         axios.post("http://127.0.0.1:3300/user/register", user, {
             withCredentials: true
         })
-            .then(() => {
+            .then((response) => {
+                setSessionStorageItem("session_id", response.data)
                 navigate("/")
             })
             .catch((error) => {

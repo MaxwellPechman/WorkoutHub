@@ -1,0 +1,1 @@
+SELECT * FROM exercise WHERE exerciseID = %(exerciseID)s;

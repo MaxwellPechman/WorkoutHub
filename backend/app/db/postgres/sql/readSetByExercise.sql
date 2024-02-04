@@ -1,0 +1,1 @@
+SELECT setID FROM exerciseSet WHERE exerciseID = %(exerciseID)s;
