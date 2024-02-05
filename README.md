@@ -9,7 +9,7 @@ Sowohl für das Backend als auch für das Frontend müssen externe Bibliotheken 
 Um für das Backend alle Daten runterzuladen sind folgende Kommandos notwendig:
 
 - `cd backend` (in den "backend"-Ordner wechseln)
-- `pip install`
+- `pip install -r requirements.txt`
 
 anschließend sollten alle Bibliotheken und Frameworks aus der requirements.txt installiert werden.
 Für das Frontend sind folgende Kommandos zu verwenden:

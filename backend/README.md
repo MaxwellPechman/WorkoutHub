@@ -21,7 +21,7 @@ Der Hauptcode befindet sich im `app`-Ordner, hier befinden sich vier weiter Unte
 Um für das Backend alle Daten runterzuladen sind folgende Kommandos notwendig:
 
 - `cd backend` (in den "backend"-Ordner wechseln)
-- `pip install`
+- `pip install -r requirements.txt`
 
 anschließend sollten alle Bibliotheken und Frameworks aus der requirements.txt installiert werden.
 Um Datenbanken mit in das Projekt einzubinden muss zusätzlich eine `.env` in den "backend"-Ordner erstellt werden mit folgendem Schema:
