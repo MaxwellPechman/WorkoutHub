@@ -30,6 +30,7 @@ def generate_random_word(length):
 def generate_database_data(amount: int):
     generate_users(amount)
     generate_workouts(amount)
+    print("Done! Synthetic ata generated.")
 
 
 def generate_users(amount: int):

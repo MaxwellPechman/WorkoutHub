@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from backend.app.db.session import create_session, get_username_from_session
-from backend.app.db.user import read_user, create_user
+from backend.app.db.user import read_user, create_user, exists_user
 from backend.app.schema.user import UserRegister, UserLogin, User
 from backend.app.util.hash import hash_string
 
@@ -20,16 +20,19 @@ async def get_username(user: User):
 
 @user_router.post("/login")
 async def login_user(user: UserLogin):
-    user_data: list = read_user(user.name)
-    hashed_password: str = hash_string(user.password)
-
-    if hashed_password == user_data[0]:
-        return True
+    if exists_user(user.name):
+        user_data: list = read_user(user.name)
+        hashed_password: str = hash_string(user.password)
+        if hashed_password == user_data[0]:
+            return create_session(user.name)
 
     return False
 
 
 @user_router.post("/register")
 async def register_user(user: UserRegister):
+    if exists_user(user.name):
+        return False
+
     create_user(user.name, user.mail, user.password)
     return create_session(user.name)

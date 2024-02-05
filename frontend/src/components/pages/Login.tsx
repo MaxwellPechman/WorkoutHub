@@ -3,17 +3,28 @@ import { useState } from "react";
 import { defaultUserLogin, UserLogin } from "../../user.ts";
 import wh_icon from "../../../assets/wh_icon.png"
 import axios from "axios";
+import {setSessionStorageItem} from "../../utils/sessionStorageUtils.tsx";
 
 export function LoginPage() {
     const [user, setUser] = useState<UserLogin>(defaultUserLogin)
     const navigate = useNavigate()
 
     function loginUser(user: UserLogin) {
+        console.log(user)
+
         axios.post("http://127.0.0.1:3300/user/login", user, {
             withCredentials: true
         })
-            .then(() => {
-                navigate("/")
+            .then((response) => {
+                console.log(response.data)
+
+                if(response.data == false) {
+                    console.log("Invalid Login.")
+
+                } else {
+                    setSessionStorageItem("session_id", response.data)
+                    navigate("/")
+                }
             })
             .catch((error) => {
                 console.log("An error occured while transmitting data to backend " + error)
@@ -35,7 +46,7 @@ export function LoginPage() {
                                maxLength={16}
                                placeholder="Enter username"
                                onChange={(event) => setUser({
-                                   name: event.target.name,
+                                   name: event.target.value,
                                    password: user.password
                                })}/>
                     </div>
@@ -48,7 +59,7 @@ export function LoginPage() {
                                placeholder="Enter password"
                                onChange={(event) => setUser({
                                    name: user.name,
-                                   password: event.target.name
+                                   password: event.target.value
                                })}/>
                     </div>
                 </div>

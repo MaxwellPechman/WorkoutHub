@@ -2,13 +2,14 @@ import { useContext, useState } from "react";
 import { Topnav } from "../topnav/Topnav.tsx";
 import { LogView } from "../views/LogView.tsx";
 import { WorkoutView } from "../views/WorkoutView.tsx";
-import { WorkoutContext } from "../providers/WorkoutProvider.tsx";
+import { Workout, WorkoutContext } from "../providers/WorkoutProvider.tsx";
 import { loadUsername, loadWorkouts } from "../../api/api.ts";
 import axios from "axios";
 
 
 export function WorkoutPage() {
     const [isWorkoutView, setWorkoutView] = useState(true)
+    const [workouts, setWorkouts] = useState<Workout[]>([] as Workout[])
     const workoutContext = useContext(WorkoutContext)
 
     function saveWorkout() {
@@ -33,11 +34,12 @@ export function WorkoutPage() {
     }
 
     function changeView() {
-        setWorkoutView(false)
-
         loadWorkouts().then((result) => {
+            setWorkouts(result.data as Workout[])
             console.log(result.data)
         })
+
+        setWorkoutView(false)
     }
 
     return (
@@ -58,7 +60,7 @@ export function WorkoutPage() {
                     ?
                     <WorkoutView/>
                     :
-                    <LogView/>
+                    <LogView workoutProp={workouts}/>
             }
             <div className="left-28 bottom-0 fixed w-[calc(100vw-7rem)] h-20 bg-blue-600 flex gap-x-4 items-center justify-end">
                 <button className="px-2 py-1 text-white text-xl border-2 border-white font-barlow-semi-condensed cursor-pointer hover:bg-blue-400 transition duration-200 ease-in-out">Clear</button>

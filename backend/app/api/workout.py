@@ -23,6 +23,4 @@ async def save_workout(workout: Workout):
 async def get_workout(user: User):
     name = get_username_from_session(user.token)
     user_data = read_user(name)[0]
-    workouts: list = []
-    # user_workouts: list[Workout] = get_user_workouts(user_data[1])
-    return get_user_workouts(39)
+    return get_user_workouts(user_data[0])

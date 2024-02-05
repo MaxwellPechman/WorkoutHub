@@ -55,8 +55,6 @@ export function ExerciseView({ count }: ExerciseCount) {
             }
         }
 
-
-
         loadUsername().then((result) => {
             workoutContext.setWorkout({
                 user: result.data,
@@ -84,7 +82,7 @@ export function ExerciseView({ count }: ExerciseCount) {
                     onClick={() => updateSets(set)}>Add set
                 </button>
             </div>
-            <div className="py-1 border-2 border-b-neutral-800 h-1 w-[107rem]"/>
+            <div className="py-1 border-2 border-b-neutral-800 h-1 w-[calc(100vw-14rem)]"/>
         </div>
     )
 }

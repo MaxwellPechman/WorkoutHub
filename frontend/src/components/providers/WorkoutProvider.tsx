@@ -19,9 +19,9 @@ export type Workout = {
     exercises: Exercise[]
 }
 
-const emptyWorkout: Workout = {
-    user: "",
-    date: "",
+export const emptyWorkout: Workout = {
+    user: "---",
+    date: "---",
     split: "Fullbody",
     exercises: [
         {

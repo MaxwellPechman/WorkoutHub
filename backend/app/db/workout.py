@@ -1,26 +1,23 @@
 from backend.app.db.postgres.postgres import postgres
 from backend.app.db.postgres.sql import sql
 from backend.app.db.user import read_user, read_user_by_id
-from backend.app.schema.workout import Workout, Exercise, Set
+from backend.app.schema.workout import Workout, Exercise
 from backend.app.util.num import strip_to_number_str
 
 
 def get_user_workouts(account_id: int) -> list:
     workouts: list = []
-    user_data = read_user_by_id(account_id)[0]
-    user_id = user_data[0]
     query = sql.get_query("readWorkoutByAccount.sql")
-    schema = {"accountID": user_id}
+    schema = {"accountID": account_id}
     workouts_data = postgres.query(query, schema)
 
-    print(workouts_data)
     for workout in workouts_data:
         workout_id = workout[0]
         sub_query = sql.get_query("readWorkout.sql")
         sub_schema = {"workoutID": workout_id}
         workout_data = postgres.query(sub_query, sub_schema)
         workout_dict = {
-            "user": user_data[1],
+            "user": read_user_by_id(account_id),
             "date": str(workout_data[0][1]),
             "split": str(workout_data[0][2]),
             "exercises": get_workout_exercises(workout_id)

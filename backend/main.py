@@ -6,7 +6,7 @@ from backend.app.api.router import api_routes
 from backend.app.config import load_urls, load_host, load_port
 from backend.app.db.postgres.postgres import postgres
 from backend.app.db.postgres.sql import sql
-
+from backend.app.generator import generate_database_data
 
 app_name = "main:app"
 app = FastAPI()
@@ -30,7 +30,7 @@ def init_db():
 if "__main__" == __name__:
     init_db()
 
-    # generate_database_data(35)
+    # generate_database_data(200)
 
     config = uvicorn.Config(host=load_host("SERVER_HOST"),
                             port=load_port("SERVER_PORT"),

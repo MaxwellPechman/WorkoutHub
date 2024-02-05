@@ -14,8 +14,15 @@ export function RegisterPage() {
             withCredentials: true
         })
             .then((response) => {
-                setSessionStorageItem("session_id", response.data)
-                navigate("/")
+                console.log(response.data)
+
+                if(response.data == false) {
+                    console.log("Invalid Register.")
+
+                } else {
+                    setSessionStorageItem("session_id", response.data)
+                    navigate("/")
+                }
             })
             .catch((error) => {
                 console.log("An error occured while transmitting data to backend " + error)
