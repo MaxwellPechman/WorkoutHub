@@ -3,12 +3,14 @@ from backend.app.db.postgres.sql import sql
 from backend.app.util.hash import hash_string
 
 
-def exists_user(name: str) -> bool:
+def exists_user(username: str) -> bool:
     query = sql.get_query("existsUser.sql")
-    result = postgres.query(query)
-    print(result)
+    names = postgres.query(query)
+    for name in names:
+        if username == name[0].decode("utf-8"):
+            return True
 
-    return name in result
+    return False
 
 
 def create_user(name: str, mail: str, password: str):

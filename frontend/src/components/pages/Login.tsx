@@ -10,14 +10,10 @@ export function LoginPage() {
     const navigate = useNavigate()
 
     function loginUser(user: UserLogin) {
-        console.log(user)
-
         axios.post("http://127.0.0.1:3300/user/login", user, {
             withCredentials: true
         })
             .then((response) => {
-                console.log(response.data)
-
                 if(response.data == false) {
                     console.log("Invalid Login.")
 

@@ -21,9 +21,9 @@ async def get_username(user: User):
 @user_router.post("/login")
 async def login_user(user: UserLogin):
     if exists_user(user.name):
-        user_data: list = read_user(user.name)
+        user_data: list = read_user(user.name)[0]
         hashed_password: str = hash_string(user.password)
-        if hashed_password == user_data[0]:
+        if hashed_password == user_data[3].decode("utf-8"):
             return create_session(user.name)
 
     return False
